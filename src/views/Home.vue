@@ -8,6 +8,16 @@
   <div id="map" v-on:click="addOrder">
     click here
   </div>
+  <div id="myID">
+    <p v-if="booleanExpression">This text is conditionally visible</p>
+  </div>
+
+  <li v-for="burger in burgers" v-bind:key="burger.name">
+    {{ burger.name }} 
+    <span v-if="burger.kCal > 400">
+      BIG MEAL
+    </span>
+  </li>
 </template>
 
 <script>
@@ -15,19 +25,44 @@ import Burger from '../components/Burger.vue'
 import io from 'socket.io-client'
 
 const socket = io();
+const emp = { firstName: 'Maike', 
+               lastName: 'Paetzel', 
+                 branch: 'Uppsala', 
+                    pos: 'PhD Student',
+                   name: function () {
+                           return this.firstName + ' ' + this.lastName;
+                         }
+            }
+
+console.log(emp.firstName);
+
+function MenuItem(name, kCal, url, gluten, lactose) {
+  this.name = name;
+  this.kCal = kCal;
+  this.url = url;
+  this.gluten = gluten;
+  this.lactose = lactose;
+
+}
+
+const menuBurgers = [new MenuItem("California", 600, "p", true, false), new MenuItem("MCegg", 500, "p", true, false)];
+console.log(menuBurgers);
+
 
 export default {
+  
   name: 'Home',
   components: {
     Burger
   },
-  data: function () {
+  
+  data: 
+    function () {
     return {
-      burgers: [ {name: "small burger", kCal: 250},
-                 {name: "standard burger", kCal: 450},
-                 {name: "large burger", kCal: 850}
-               ]
+      burgers: menuBurgers,
+      booleanExpression: true
     }
+    
   },
   methods: {
     getOrderNumber: function () {
@@ -45,6 +80,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style>
