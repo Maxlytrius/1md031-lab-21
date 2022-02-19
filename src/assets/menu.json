@@ -1,0 +1,17 @@
+[
+  {
+    "name": "California",
+    "kCal": 850,
+    "lactose": true,
+    "gluten": false,
+    "img": "CaliforniaBurger.jpg"
+  },
+
+  {
+    "name": "McEgg",
+    "kCal": 900,
+    "lactose": true,
+    "gluten": false,
+    "img": "CaliforniaBurger.jpg"
+  }
+]
